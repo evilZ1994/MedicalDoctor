@@ -18,6 +18,7 @@
         app:srcCompat="@drawable/ic_doctor_white_1" />
 
     <TextView
+        android:id="@+id/doctor_name"
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -26,6 +27,7 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
+        android:id="@+id/hospital"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="android.studio@android.com"
