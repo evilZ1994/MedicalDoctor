@@ -129,6 +129,8 @@ public class RegisterPresenter extends BasePresenter<RegisterView> {
                                                         //登陆成功保存用户信息
                                                         //保存用户信息到本地数据库
                                                         dataManager.storeUser(loginResponse);
+                                                        getView().hideDialog();
+                                                        getView().onComplete();
                                                     }else {
                                                         getView().hideDialog();
                                                         getView().onError(loginResponse.getMessage());

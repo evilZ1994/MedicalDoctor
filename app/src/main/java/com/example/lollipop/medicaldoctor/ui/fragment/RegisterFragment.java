@@ -51,20 +51,21 @@ public class RegisterFragment extends BaseFragment implements RegisterView{
     //点击后执行注册操作
     @OnClick(R.id.register)
     void register(){
+        String username = usernameText.getText().toString();
         String password = passwordText.getText().toString();
         String repeatPassword = passwordRepeatText.getText().toString();
-        if (password.length()>=4){
-            if (password.equals(repeatPassword)){
-                String username = usernameText.getText().toString();
-                String name = nameText.getText().toString();
-                String hospital = hospitalText.getText().toString();
-                String department = departmentText.getText().toString();
-                User user = new User(username, name, password, hospital, department);
-                registerPresenter.register(gson.toJson(user));
-            } else
-                Toast.makeText(getContext(), "两次输入的密码不一致！", Toast.LENGTH_SHORT).show();
-        }else {
+        if (username.length()<4){
+            Toast.makeText(getContext(), "用户名长度至少为4", Toast.LENGTH_SHORT).show();
+        }else if (password.length()<4){
             Toast.makeText(getContext(), "密码长度至少为4", Toast.LENGTH_SHORT).show();
+        }else if (!password.equals(repeatPassword)){
+            Toast.makeText(getContext(), "两次输入的密码不一致！", Toast.LENGTH_SHORT).show();
+        }else {
+            String name = nameText.getText().toString();
+            String hospital = hospitalText.getText().toString();
+            String department = departmentText.getText().toString();
+            User user = new User(name, username, password, hospital, department);
+            registerPresenter.register(gson.toJson(user));
         }
     }
 
