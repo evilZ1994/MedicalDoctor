@@ -25,7 +25,7 @@ import io.reactivex.schedulers.Schedulers;
 public class DataManager {
     private final ApiService apiService;
     private final Gson gson;
-    private final String TYPE = "doctor"; //请求类型，代表访问服务器的是patient
+    private final String TYPE = "doctor"; //请求类型，代表访问服务器的是doctor
 
     @Inject
     public DataManager(ApiService apiService, Gson gson){
@@ -96,6 +96,10 @@ public class DataManager {
                 .subscribe(observer);
     }
 
+    /**
+     * 登陆成功后将用户信息保存到application
+     * @param loginResponse
+     */
     public void storeUser(LoginResponse loginResponse) {
         User user = new User();
         user.setId(loginResponse.getUser().getId());
@@ -106,4 +110,6 @@ public class DataManager {
         user.setDepartment(loginResponse.getUser().getDepartment());
         App.setCurrentUser(user);
     }
+
+
 }

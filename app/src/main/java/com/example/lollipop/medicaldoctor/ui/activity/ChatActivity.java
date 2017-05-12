@@ -56,9 +56,9 @@ public class ChatActivity extends AppCompatActivity {
         adapter = new MsgListAdapter<>("0", new MsgListAdapter.HoldersConfig(), null);
         messageList.setAdapter(adapter);
         //获取当前conversation，如果没有则新建
-        conversation = JMessageClient.getSingleConversation(patient.getDisplayName());
+        conversation = JMessageClient.getSingleConversation(patient.getDisplayName(), App.CHAT_APP_KEY);
         if (conversation == null){
-            conversation = Conversation.createSingleConversation(patient.getDisplayName());
+            conversation = Conversation.createSingleConversation(patient.getDisplayName(), App.CHAT_APP_KEY);
         }
         //获取本地聊天记录,并展示
         showLocalMessages();
@@ -72,7 +72,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public boolean onSendTextMessage(final CharSequence input) {
                 if (input != null && !input.equals("")){
-                    Message message = JMessageClient.createSingleTextMessage(patient.getDisplayName(), input.toString());
+                    Message message = JMessageClient.createSingleTextMessage(patient.getDisplayName(), App.CHAT_APP_KEY, input.toString());
                     message.setOnSendCompleteCallback(new BasicCallback() {
                         @Override
                         public void gotResult(int i, String s) {

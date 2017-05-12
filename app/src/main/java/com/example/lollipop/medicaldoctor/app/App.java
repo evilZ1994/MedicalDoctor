@@ -23,6 +23,8 @@ public class App extends Application {
 
     private static User currentUser;
 
+    public static String CHAT_APP_KEY = "47006befb871807426651298";
+
     @Override
     public void onCreate() {
         super.onCreate();

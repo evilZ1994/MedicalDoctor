@@ -17,6 +17,7 @@ import com.example.lollipop.medicaldoctor.mvp.presenter.RegisterPresenter;
 import com.example.lollipop.medicaldoctor.mvp.view.RegisterView;
 import com.example.lollipop.medicaldoctor.ui.activity.MainActivity;
 import com.example.lollipop.medicaldoctor.ui.base.BaseFragment;
+import com.example.lollipop.medicaldoctor.util.CheckChineseUtil;
 import com.google.gson.Gson;
 
 import javax.inject.Inject;
@@ -56,6 +57,8 @@ public class RegisterFragment extends BaseFragment implements RegisterView{
         String repeatPassword = passwordRepeatText.getText().toString();
         if (username.length()<4){
             Toast.makeText(getContext(), "用户名长度至少为4", Toast.LENGTH_SHORT).show();
+        }else if (CheckChineseUtil.isContainsChinese(username)){
+            Toast.makeText(getContext(), "用户名只能包含字母或数字", Toast.LENGTH_SHORT).show();
         }else if (password.length()<4){
             Toast.makeText(getContext(), "密码长度至少为4", Toast.LENGTH_SHORT).show();
         }else if (!password.equals(repeatPassword)){
