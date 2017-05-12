@@ -1,34 +1,53 @@
 package com.example.lollipop.medicaldoctor.ui.activity;
 
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.example.lollipop.medicaldoctor.R;
 import com.example.lollipop.medicaldoctor.app.App;
+import com.example.lollipop.medicaldoctor.ui.fragment.InfoFragment;
+import com.example.lollipop.medicaldoctor.ui.fragment.MainFragment;
+import com.example.lollipop.medicaldoctor.ui.fragment.SettingFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class MainActivity extends FragmentActivity {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
+    private FragmentManager fragmentManager;
+    private FragmentTransaction transaction;
 
-    @BindView(R.id.frame_layout)
-    FrameLayout frameLayout;
+    private Fragment mainFragment;
+    private Fragment infoFragment;
+    private Fragment settingFragment;
+
     @BindView(R.id.d_navigation_view)
     NavigationView navigationView;
-    @BindView(R.id.doctor_name)
-    TextView nameText;
-    @BindView(R.id.hospital)
-    TextView hospitalText;
+    @BindView(R.id.d_drawer_layout)
+    DrawerLayout drawerLayout;
 
+    private TextView nameText;
+    private TextView hospitalText;
+    private Toolbar toolbar;
+    private FrameLayout frameLayout;
+    private View headerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +61,31 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void init() {
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawerLayout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        frameLayout = (FrameLayout) findViewById(R.id.frame_layout);
+
+        headerView = navigationView.getHeaderView(0);
+        nameText = (TextView) headerView.findViewById(R.id.doctor_name);
+        hospitalText = (TextView) headerView.findViewById(R.id.hospital);
         nameText.setText(App.getCurrentUser().getName());
         hospitalText.setText(App.getCurrentUser().getHospital());
 
-        Menu menu = navigationView.getMenu();
-        
+        fragmentManager = getSupportFragmentManager();
+        mainFragment = new MainFragment();
+        infoFragment = new InfoFragment();
+        settingFragment = new SettingFragment();
+
+        transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.frame_layout, mainFragment);
+        transaction.commit();
+
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
     private void setStatusBar() {
@@ -57,5 +96,29 @@ public class MainActivity extends FragmentActivity {
             //透明导航栏
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
         }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        switch (id){
+            case R.id.home:
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.frame_layout, mainFragment);
+                transaction.commit();
+                break;
+            case R.id.person_info:
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.frame_layout, infoFragment);
+                transaction.commit();
+                break;
+            case R.id.setting:
+                transaction = fragmentManager.beginTransaction();
+                transaction.replace(R.id.frame_layout, settingFragment);
+                transaction.commit();
+                break;
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
     }
 }

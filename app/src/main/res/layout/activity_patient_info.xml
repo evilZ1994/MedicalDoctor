@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.ListViewCompat
-        android:id="@+id/doctor_info_list"
+        android:id="@+id/patient_info_list"
         android:divider="@color/simpleWhite"
         android:dividerHeight="1dp"
         android:layout_width="match_parent"

@@ -2,6 +2,7 @@ package com.example.lollipop.medicaldoctor.injector.component;
 
 import com.example.lollipop.medicaldoctor.injector.module.ActivityModule;
 import com.example.lollipop.medicaldoctor.injector.scope.PerActivity;
+import com.example.lollipop.medicaldoctor.ui.activity.PatientInfoActivity;
 
 import dagger.Component;
 
@@ -11,5 +12,5 @@ import dagger.Component;
 @PerActivity
 @Component(dependencies = ApplicationComponent.class, modules = ActivityModule.class)
 public interface ActivityComponent {
-
+    void inject(PatientInfoActivity patientInfoActivity);
 }

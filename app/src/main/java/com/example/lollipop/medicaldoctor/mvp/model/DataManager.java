@@ -5,6 +5,7 @@ import com.example.lollipop.medicaldoctor.app.App;
 import com.example.lollipop.medicaldoctor.data.bean.User;
 import com.example.lollipop.medicaldoctor.data.response.DoctorUserInfoResponse;
 import com.example.lollipop.medicaldoctor.data.response.LoginResponse;
+import com.example.lollipop.medicaldoctor.data.response.PatientListResponse;
 import com.example.lollipop.medicaldoctor.data.response.PatientUserInfoResponse;
 import com.example.lollipop.medicaldoctor.data.response.RegisterResponse;
 import com.google.gson.Gson;
@@ -56,6 +57,17 @@ public class DataManager {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(consumer);
+    }
+
+    /**
+     * 获取患者列表
+     * @param observer
+     */
+    public void getPatientList(Observer<PatientListResponse> observer){
+        apiService.getPatientList(App.getCurrentUser().getId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
     }
 
     /**

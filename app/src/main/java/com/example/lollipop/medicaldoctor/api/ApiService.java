@@ -2,6 +2,7 @@ package com.example.lollipop.medicaldoctor.api;
 
 import com.example.lollipop.medicaldoctor.data.response.DoctorUserInfoResponse;
 import com.example.lollipop.medicaldoctor.data.response.LoginResponse;
+import com.example.lollipop.medicaldoctor.data.response.PatientListResponse;
 import com.example.lollipop.medicaldoctor.data.response.PatientUserInfoResponse;
 import com.example.lollipop.medicaldoctor.data.response.RegisterResponse;
 
@@ -28,6 +29,8 @@ public interface ApiService {
     Observable<RegisterResponse> register(@Field("type") String type,
                                           @Field("user") String userString);
 
+    @GET("GetPatientListServlet")
+    Observable<PatientListResponse> getPatientList(@Query("id") int id);
 
     @GET("GetUserInfoServlet")
     Observable<PatientUserInfoResponse> getUserInfo(@Query("type") String type,

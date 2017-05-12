@@ -12,9 +12,25 @@ public class DefaultUser implements IUser {
     private String displayName;
     private String avatar;
 
+    public DefaultUser() {
+        super();
+    }
+
     public DefaultUser(String id, String displayName, String avatar) {
         this.id = id;
         this.displayName = displayName;
+        this.avatar = avatar;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setDisplayName(String displayName) {
+        this.displayName = displayName;
+    }
+
+    public void setAvatar(String avatar) {
         this.avatar = avatar;
     }
 

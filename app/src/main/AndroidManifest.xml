@@ -33,8 +33,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MainActivity" />
-        <activity android:name=".ui.activity.RegisterActivity"/>
+        <activity
+            android:name=".ui.activity.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.activity.RegisterActivity" />
+        <activity android:name=".ui.activity.PatientInfoActivity" />
+        <activity android:name=".ui.activity.DataActivity" />
+        <activity android:name=".ui.activity.ChatActivity"></activity>
     </application>
 
 </manifest>
