@@ -1,5 +1,7 @@
 package com.example.lollipop.medicaldoctor.api;
 
+import com.example.lollipop.medicaldoctor.data.response.DataDetailResponse;
+import com.example.lollipop.medicaldoctor.data.response.DataDownloadResponse;
 import com.example.lollipop.medicaldoctor.data.response.DoctorUserInfoResponse;
 import com.example.lollipop.medicaldoctor.data.response.LoginResponse;
 import com.example.lollipop.medicaldoctor.data.response.PatientListResponse;
@@ -31,6 +33,13 @@ public interface ApiService {
 
     @GET("GetPatientListServlet")
     Observable<PatientListResponse> getPatientList(@Query("id") int id);
+
+    @GET("DataDownloadServlet")
+    Observable<DataDownloadResponse> getDataList(@Query("id") int id);
+
+    @GET("GetDataDetailServlet")
+    Observable<DataDetailResponse> getDataDetail(@Query("id") int id,
+                                                 @Query("tag") String tag);
 
     @GET("GetUserInfoServlet")
     Observable<PatientUserInfoResponse> getUserInfo(@Query("type") String type,

@@ -3,6 +3,8 @@ package com.example.lollipop.medicaldoctor.mvp.model;
 import com.example.lollipop.medicaldoctor.api.ApiService;
 import com.example.lollipop.medicaldoctor.app.App;
 import com.example.lollipop.medicaldoctor.data.bean.User;
+import com.example.lollipop.medicaldoctor.data.response.DataDetailResponse;
+import com.example.lollipop.medicaldoctor.data.response.DataDownloadResponse;
 import com.example.lollipop.medicaldoctor.data.response.DoctorUserInfoResponse;
 import com.example.lollipop.medicaldoctor.data.response.LoginResponse;
 import com.example.lollipop.medicaldoctor.data.response.PatientListResponse;
@@ -65,6 +67,31 @@ public class DataManager {
      */
     public void getPatientList(Observer<PatientListResponse> observer){
         apiService.getPatientList(App.getCurrentUser().getId())
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
+    /**
+     * 获取数据
+     * @param id 患者id
+     * @param observer
+     */
+    public void getDataList(int id, Observer<DataDownloadResponse> observer){
+        apiService.getDataList(id)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(observer);
+    }
+
+    /**
+     * 获取详细数据
+     * @param id 患者id
+     * @param tag 数据的类型
+     * @param observer
+     */
+    public void getDataDetail(int id, String tag, Observer<DataDetailResponse> observer){
+        apiService.getDataDetail(id, tag)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(observer);

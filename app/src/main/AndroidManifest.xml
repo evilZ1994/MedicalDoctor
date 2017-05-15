@@ -39,7 +39,8 @@
         <activity android:name=".ui.activity.RegisterActivity" />
         <activity android:name=".ui.activity.PatientInfoActivity" />
         <activity android:name=".ui.activity.DataActivity" />
-        <activity android:name=".ui.activity.ChatActivity"></activity>
+        <activity android:name=".ui.activity.ChatActivity" />
+        <activity android:name=".ui.activity.DataDetailActivity"></activity>
     </application>
 
 </manifest>
