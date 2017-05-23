@@ -7,6 +7,7 @@ import com.example.lollipop.medicaldoctor.data.response.LoginResponse;
 import com.example.lollipop.medicaldoctor.data.response.PatientListResponse;
 import com.example.lollipop.medicaldoctor.data.response.PatientUserInfoResponse;
 import com.example.lollipop.medicaldoctor.data.response.RegisterResponse;
+import com.example.lollipop.medicaldoctor.data.response.UpdateInfoResponse;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
@@ -48,4 +49,10 @@ public interface ApiService {
     @GET("GetUserInfoServlet")
     Observable<DoctorUserInfoResponse> getDoctorInfo(@Query("type") String type,
                                                      @Query("id") int id);
+
+    @GET("InfoChangeServlet")
+    Observable<UpdateInfoResponse> updateInfo(@Query("type") String type,
+                                              @Query("id") int id,
+                                              @Query("tag") String tag,
+                                              @Query("content") String content);
 }

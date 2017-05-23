@@ -57,7 +57,7 @@ public class UserInfoPresenter extends BasePresenter<UserInfoView> {
                 Map<String, String> item4 = new HashMap<>();
                 item4.put("title", "医院");
                 item4.put("content", doctorUserInfoResponse.getHospital());
-                item4.put("tag", "age");
+                item4.put("tag", "hospital");
                 items.add(item4);
                 Map<String, String> item5 = new HashMap<>();
                 item5.put("title", "科室");

@@ -7,23 +7,27 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.example.lollipop.medicaldoctor.R;
+import com.example.lollipop.medicaldoctor.ui.dialog.DoctorInfoChangeDialog;
 
 import java.util.List;
 import java.util.Map;
+
+import io.reactivex.annotations.NonNull;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by Lollipop on 2017/5/11.
  */
 
-public class PatientInfoAdapter extends BaseAdapter {
+public class InfoAdapter extends BaseAdapter {
     private List<Map<String, String>> items;
 
-    private static class ViewHolder{
-        AppCompatTextView title;
-        AppCompatTextView content;
+    public static class ViewHolder{
+        public AppCompatTextView title;
+        public AppCompatTextView content;
     }
 
-    public PatientInfoAdapter(List<Map<String, String>> items) {
+    public InfoAdapter(List<Map<String, String>> items) {
         super();
         this.items = items;
     }
@@ -48,8 +52,8 @@ public class PatientInfoAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
-        ViewHolder viewHolder;
+    public View getView(int i, View view, final ViewGroup viewGroup) {
+        final ViewHolder viewHolder;
         if (view == null){
             view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.info_item, viewGroup, false);
             viewHolder = new ViewHolder();
@@ -61,7 +65,7 @@ public class PatientInfoAdapter extends BaseAdapter {
         }
 
         if (items != null && items.size()>0){
-            Map<String, String> item = items.get(i);
+            final Map<String, String> item = items.get(i);
             viewHolder.title.setText(item.get("title"));
             viewHolder.content.setText(item.get("content"));
         }
