@@ -15,7 +15,7 @@ import java.util.Map;
  * Created by Lollipop on 2017/5/11.
  */
 
-public class InfoAdapter extends BaseAdapter {
+public class PatientInfoAdapter extends BaseAdapter {
     private List<Map<String, String>> items;
 
     private static class ViewHolder{
@@ -23,7 +23,7 @@ public class InfoAdapter extends BaseAdapter {
         AppCompatTextView content;
     }
 
-    public InfoAdapter(List<Map<String, String>> items) {
+    public PatientInfoAdapter(List<Map<String, String>> items) {
         super();
         this.items = items;
     }

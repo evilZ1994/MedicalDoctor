@@ -2,7 +2,6 @@ package com.example.lollipop.medicaldoctor.ui.fragment;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.widget.ListViewCompat;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +11,7 @@ import com.example.lollipop.medicaldoctor.R;
 import com.example.lollipop.medicaldoctor.app.App;
 import com.example.lollipop.medicaldoctor.mvp.presenter.UserInfoPresenter;
 import com.example.lollipop.medicaldoctor.mvp.view.UserInfoView;
-import com.example.lollipop.medicaldoctor.ui.adapter.InfoAdapter;
+import com.example.lollipop.medicaldoctor.ui.adapter.PatientInfoAdapter;
 import com.example.lollipop.medicaldoctor.ui.base.BaseFragment;
 
 import java.util.ArrayList;
@@ -25,11 +24,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 医生个人信息页
  */
 public class InfoFragment extends BaseFragment implements UserInfoView {
     private List<Map<String, String>> items = new ArrayList<>();
-    private InfoAdapter adapter;
+    private PatientInfoAdapter adapter;
 
     @BindView(R.id.doctor_info_list)
     ListViewCompat infoList;
@@ -53,7 +52,7 @@ public class InfoFragment extends BaseFragment implements UserInfoView {
         presenter.attachView(this);
 
         //初始化adapter
-        adapter = new InfoAdapter(items);
+        adapter = new PatientInfoAdapter(items);
         //设置adapter
         infoList.setAdapter(adapter);
 

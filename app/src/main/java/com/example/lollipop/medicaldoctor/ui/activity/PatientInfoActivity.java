@@ -1,14 +1,13 @@
 package com.example.lollipop.medicaldoctor.ui.activity;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.ListViewCompat;
 
 import com.example.lollipop.medicaldoctor.R;
 import com.example.lollipop.medicaldoctor.mvp.presenter.InfoPresenter;
 import com.example.lollipop.medicaldoctor.mvp.view.UserInfoView;
-import com.example.lollipop.medicaldoctor.ui.adapter.InfoAdapter;
+import com.example.lollipop.medicaldoctor.ui.adapter.PatientInfoAdapter;
 import com.example.lollipop.medicaldoctor.ui.base.BaseActivity;
 
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ import butterknife.ButterKnife;
 public class PatientInfoActivity extends BaseActivity implements UserInfoView {
 
     private List<Map<String, String>> items = new ArrayList<>();
-    private InfoAdapter adapter;
+    private PatientInfoAdapter adapter;
 
     @BindView(R.id.patient_info_list)
     ListViewCompat infoList;
@@ -46,7 +45,7 @@ public class PatientInfoActivity extends BaseActivity implements UserInfoView {
         int id = intent.getIntExtra("id", 0);
 
         //初始化adapter
-        adapter = new InfoAdapter(items);
+        adapter = new PatientInfoAdapter(items);
         //设置adapter
         infoList.setAdapter(adapter);
 
