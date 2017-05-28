@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.lollipop.medicaldoctor.R;
 import com.example.lollipop.medicaldoctor.app.App;
@@ -29,6 +30,7 @@ import com.example.lollipop.medicaldoctor.ui.fragment.SettingFragment;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import cn.jpush.im.android.api.JMessageClient;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
     private FragmentManager fragmentManager;
@@ -37,6 +39,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private Fragment mainFragment;
     private Fragment infoFragment;
     private Fragment settingFragment;
+
+    //点击返回键时的时间，用于控制双击退出
+    private long mPressedTime = 0;
 
     @BindView(R.id.d_navigation_view)
     NavigationView navigationView;
@@ -121,5 +126,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    /**
+     * 重写onBackPressed()方法，设置双击退出，时间差500毫秒
+     */
+    @Override
+    public void onBackPressed() {
+        long mNowTime = System.currentTimeMillis();
+        if (mNowTime - mPressedTime > 500){
+            Toast.makeText(this, "再次点击退出", Toast.LENGTH_SHORT).show();
+            mPressedTime = mNowTime;
+        } else {
+            //退出程序
+            //JMessage登出
+            JMessageClient.logout();
+            //结束程序
+            this.finish();
+            System.exit(0);
+        }
     }
 }
