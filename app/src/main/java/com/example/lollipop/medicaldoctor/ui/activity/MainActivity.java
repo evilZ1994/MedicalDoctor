@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         frameLayout = (FrameLayout) findViewById(R.id.frame_layout);
 
+        //侧边栏显示姓名和医院
         headerView = navigationView.getHeaderView(0);
         nameText = (TextView) headerView.findViewById(R.id.doctor_name);
         hospitalText = (TextView) headerView.findViewById(R.id.hospital);
